@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class Homepage extends Component
 {
-    public string $search;
+    public $search = '';
 
 
     #[Layout('layouts.guest')]
@@ -19,6 +19,7 @@ class Homepage extends Component
     {
         return view('livewire.homepage', [
             'events' => Event::query()
+                ->where('name', 'like', "%{$this->search}%")
                 ->paginate(10),
         ]);
     }
